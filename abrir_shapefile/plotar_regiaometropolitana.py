@@ -9,7 +9,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 
 # Carregar o shapefile dos municípios de Pernambuco
-pernambuco_shapefile = "/home/taty/Downloads/PE_Municipios_2022.shp"
+pernambuco_shapefile = "/PE_Municipios_2022.shp"
 municipios = gpd.read_file(pernambuco_shapefile)
 
 # Filtrar os municípios da região metropolitana de Recife
@@ -41,7 +41,7 @@ ax.set_ylabel("Latitude")
 plt.title('Região Metropolitana do Recife', fontweight='bold', fontsize=25, loc='center')
 
 # Salvar
-#plt.savefig('/home/taty/Imagens/rmr_foco.png', bbox_inches='tight', pad_inches=0.1, dpi=300)
+plt.savefig('/Imagens/rmr_foco.png', bbox_inches='tight', pad_inches=0.2, dpi=300)
 
 # Exibir o gráfico
 plt.show()
