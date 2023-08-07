@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 10 20:53:14 2023
 
-@author: tatyane
-"""
+#Autor: INPE / CPTEC
+#Editado por: Tatyane Sousa - Meteorologista - tatyanecss@gmail.com
 
-#-----------------------------------------------------------------------------------------------------------
-# INPE / CPTEC - Training: Python and GOES-R Imagery: Script 14 - Reprojection with GDAL
-#-----------------------------------------------------------------------------------------------------------
 # Required modules
 from netCDF4 import Dataset                     # Read / Write NetCDF4 files
 import matplotlib.pyplot as plt                 # Plotting library
@@ -130,8 +125,8 @@ gl.top_labels = False
 gl.right_labels = False
 gl.xformatter = LONGITUDE_FORMATTER
 gl.yformatter = LATITUDE_FORMATTER
-#gl.xlocator  =  mticker.FixedLocator(np.arange(-52,-39,2)) #intervalo x
-#gl.ylocator  =  mticker.FixedLocator(np.arange(-23,-14,2)) #intervalo y
+gl.xlocator  =  mticker.FixedLocator(np.arange(-52,-39,2)) #intervalo x
+gl.ylocator  =  mticker.FixedLocator(np.arange(-23,-14,2)) #intervalo y
 
 # Add a colorbar
 plt.colorbar(img, label='Temperatura (°C)', extend='both', orientation='horizontal', pad=0.05, fraction=0.05)

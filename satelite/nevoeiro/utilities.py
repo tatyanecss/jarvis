@@ -19,6 +19,8 @@ import sys
 from datetime import timedelta, date, datetime   # Manipulate dates
 import cartopy.io.shapereader as shpreader # Import shapefiles
 import pandas as pd                        # Read and manipulate CSV file
+import cartopy.io.shapereader as shpreader      # Import shapefiles
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
 #-----------------------------------------------------------------------------------------------------------
 def loadCPT(path):
@@ -388,7 +390,7 @@ def plot_map(dtime, file_name, extent, properties):
          cmap=properties['colormap'])
 
         # Add a shapefile
-        shapefile = list(shpreader.Reader('/home/taty/Downloads/GIT/BR_UF_2019.shp').geometries())
+        shapefile = list(shpreader.Reader('/home/taty/Área de Trabalho/satelite/nevoeiro/BR_UF_2019.shp').geometries())
         ax.add_geometries(shapefile, ccrs.PlateCarree(), edgecolor='white',\
          facecolor='none', linewidth=0.3)
 
@@ -396,16 +398,16 @@ def plot_map(dtime, file_name, extent, properties):
         ax.coastlines(resolution='10m', color='white', linewidth=0.8)
         ax.add_feature(cartopy.feature.BORDERS, edgecolor='white', linewidth=0.5)
         gl = ax.gridlines(crs=ccrs.PlateCarree(), color='gray', alpha=1.0,\
-         linestyle='--', linewidth=0.25, xlocs=np.arange(-180, 180, 2),\
-          ylocs=np.arange(-90, 90, 2), draw_labels=True)
+         linestyle='--', linewidth=0.25, xlocs=np.arange(-43.5, -42.8, 0.1),\
+          ylocs=np.arange(-23.1, -22.6, 0.1), draw_labels=True)
         gl.top_labels = False
         gl.right_labels = False
 
         # Plot some places
-        file_places = '/home/taty/Downloads/GIT/places.csv'
-        df = pd.read_csv(file_places)
-        for index, row in df.iterrows():
-            plt.text(row['lon'],row['lat'],row['id'], color='blue')
+#        file_places = '/home/taty/Downloads/GIT/places.csv'
+#        df = pd.read_csv(file_places)
+#        for index, row in df.iterrows():
+#            plt.text(row['lon'],row['lat'],row['id'], color='blue')
 
         # Add a colorbar
         plt.colorbar(img, label=properties['label'], \
@@ -418,7 +420,8 @@ def plot_map(dtime, file_name, extent, properties):
         plt.title('Reg.: ' + str(extent) , fontsize=10, loc='right')
 
         # Save the image
-        plt.savefig(f'{file_name}.png', bbox_inches='tight', pad_inches=0.2,\
+        data_formatada = date.strftime('%d%m%Y_%H%M')
+        plt.savefig(f'/home/taty/Área de Trabalho/satelite/nevoeiro/output/nevoeiro_zoom_{data_formatada}.png', bbox_inches='tight', pad_inches=0.2,\
          dpi=300)
         # Show the image
         plt.show()
